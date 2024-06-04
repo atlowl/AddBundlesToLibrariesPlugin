@@ -1,0 +1,39 @@
+{
+  "name": "add-bundles-to-libraries-plugin",
+  "version": "1.0.0",
+  "description": "Automatically updates *.libraries.yml with changes from webpack",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atlowl/AddBundlesToLibrariesPlugin.git"
+  },
+  "keywords": [
+    "drupal",
+    "react",
+    "webpack",
+    "npm",
+    "node",
+    "library",
+    "libraries",
+    "compile",
+    "build"
+  ],
+  "author": "Grant McEwan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atlowl/AddBundlesToLibrariesPlugin/issues"
+  },
+  "homepage": "https://github.com/atlowl/AddBundlesToLibrariesPlugin#readme",
+  "dependencies": {
+    "glob": "^10.4.1",
+    "path": "^0.12.7",
+    "yaml": "^2.4.3"
+  }
+}
