@@ -18,7 +18,6 @@ class AddBundlesToLibrariesPlugin {
     this.validateOptions(this.options);
 
     this.options.distPath = options?.distPath ?? path.resolve(dirname, 'dist');
-
     this.options.libraryFileName = options?.libraryFileName ?? (() => {
       const libraryName = path.resolve(dirname, '..').split('/').slice(-1);
       return path.resolve(dirname, (`../${libraryName + '.libraries.yml'}`));
@@ -65,11 +64,11 @@ class AddBundlesToLibrariesPlugin {
 
   apply(compiler) {
     compiler.hooks.done.tap('Add output bundles to module library', () => {
-      const distPath = this.options.distPath;
+      const distPath = '../' + this.options.distPath;
       const libraryFileName = this.options.libraryFileName;
 
-      let bundleFiles = globSync(`${distPath}/*.js`);
-      let cssFiles = globSync(`${distPath}/*.css`);
+      let bundleFiles = globSync(`${distPath}/*.js`).map(file => path.basename(file));
+      let cssFiles = globSync(`${distPath}/*.css`).map(file => path.basename(file));
 
       try {
         const fileContents = fs.readFileSync(libraryFileName, 'utf-8');
@@ -78,14 +77,13 @@ class AddBundlesToLibrariesPlugin {
 
         data[moduleKey].js = {};
         data[moduleKey].css.layout = {};
-
         bundleFiles.forEach(file => {
-          const bundlePath = file.split(this.options.moduleName)[1].slice(1);
+          const bundlePath = `${this.options.distPath}/${file.split(this.options.moduleName)[0]}`;
           data[moduleKey].js[bundlePath] = {minified: true, preprocess: false};
         });
 
         cssFiles.forEach(file => {
-          const bundlePath = file.split(this.options.moduleName)[1].slice(1);
+          const bundlePath = `${this.options.distPath}/${file.split(this.options.moduleName)[0]}`;
           data[moduleKey].css.layout[bundlePath] = {};
         });
 
