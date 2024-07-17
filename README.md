@@ -43,7 +43,6 @@ module.exports = {
   ]
 };
 ```
-
 Alternatively, you may provide options to the plugin to specify the paths
 ```
 module.exports = {
@@ -56,4 +55,29 @@ module.exports = {
     })
   ]
 };
+```
+
+As an example lets say my_drupal_project is structured like
+```
+-- my_drupal_project
+ |-- config
+ |-- js
+   |-- dist
+     |-- vendor.bundle.js
+     |-- main.bundle.js
+   |-- src
+   |-- webpack.config.js
+ |-- src
+ |-- my_drupal_project.libraries.yml
+ |-- my_drupal_project.module
+ ... etc
+ 
+```
+So our configuration would look like: 
+```
+new AddBundlesToLibrariesPlugin({
+    distPath: 'js/dist',
+    libraryFileName: '../my_drupal_project.libraries.yml',
+    moduleName: 'my_drupal_project'
+})
 ```
