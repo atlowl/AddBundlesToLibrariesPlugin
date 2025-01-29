@@ -75,8 +75,13 @@ class AddBundlesToLibrariesPlugin {
         const data = YAML.parse(fileContents);
         const moduleKey = Object.keys(data);
 
-        data[moduleKey].js = {};
-        data[moduleKey].css.layout = {};
+        data[moduleKey] = {
+          js: {},
+          css: {
+            layout: {}
+          }
+        };
+
         bundleFiles.forEach(file => {
           const bundlePath = `${this.options.distPath}/${file.split(this.options.moduleName)[0]}`;
           data[moduleKey].js[bundlePath] = {minified: true, preprocess: false};
