@@ -75,22 +75,23 @@ class AddBundlesToLibrariesPlugin {
         const data = YAML.parse(fileContents);
         const moduleKey = Object.keys(data);
 
-        data[moduleKey] = {
-          js: {},
-          css: {
-            layout: {}
-          }
-        };
+        data[moduleKey] = {};
 
-        bundleFiles.forEach(file => {
-          const bundlePath = `${this.options.distPath}/${file.split(this.options.moduleName)[0]}`;
-          data[moduleKey].js[bundlePath] = {minified: true, preprocess: false};
-        });
+        if (bundleFiles.length > 0) {
+            data[moduleKey].js = {};
+            bundleFiles.forEach(file => {
+              const bundlePath = `${this.options.distPath}/${file.split(this.options.moduleName)[0]}`;
+              data[moduleKey].js[bundlePath] = {minified: true, preprocess: false};
+            });
+        }
 
-        cssFiles.forEach(file => {
-          const bundlePath = `${this.options.distPath}/${file.split(this.options.moduleName)[0]}`;
-          data[moduleKey].css.layout[bundlePath] = {};
-        });
+        if (cssFiles.length > 0) {
+            data[moduleKey].css = {};
+            cssFiles.forEach(file => {
+              const bundlePath = `${this.options.distPath}/${file.split(this.options.moduleName)[0]}`;
+              data[moduleKey].css.layout[bundlePath] = {};
+            });
+        }
 
         fs.writeFileSync(libraryFileName, YAML.stringify(data));
       } catch (err) {
