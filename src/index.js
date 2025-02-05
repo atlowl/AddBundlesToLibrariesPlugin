@@ -78,7 +78,7 @@ class AddBundlesToLibrariesPlugin {
         data[moduleKey] = {};
 
         if (bundleFiles.length > 0) {
-            data[moduleKey].js = {layout: {}};
+            data[moduleKey].js = {};
             bundleFiles.forEach(file => {
               const bundlePath = `${this.options.distPath}/${file.split(this.options.moduleName)[0]}`;
               data[moduleKey].js[bundlePath] = {minified: true, preprocess: false};
@@ -86,7 +86,7 @@ class AddBundlesToLibrariesPlugin {
         }
 
         if (cssFiles.length > 0) {
-            data[moduleKey].css = {};
+            data[moduleKey].css = {layout: {}};
             cssFiles.forEach(file => {
               const bundlePath = `${this.options.distPath}/${file.split(this.options.moduleName)[0]}`;
               data[moduleKey].css.layout[bundlePath] = {};
