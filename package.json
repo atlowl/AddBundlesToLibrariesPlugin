@@ -1,6 +1,6 @@
 {
   "name": "add-bundles-to-libraries-plugin",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "Automatically updates *.libraries.yml with changes from webpack",
   "type": "commonjs",
   "main": "src/index.js",

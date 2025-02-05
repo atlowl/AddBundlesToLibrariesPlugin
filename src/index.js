@@ -78,7 +78,7 @@ class AddBundlesToLibrariesPlugin {
         data[moduleKey] = {};
 
         if (bundleFiles.length > 0) {
-            data[moduleKey].js = {};
+            data[moduleKey].js = {layout: {}};
             bundleFiles.forEach(file => {
               const bundlePath = `${this.options.distPath}/${file.split(this.options.moduleName)[0]}`;
               data[moduleKey].js[bundlePath] = {minified: true, preprocess: false};
